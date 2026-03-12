@@ -45,58 +45,18 @@ font-size:16px;
 background:#38bdf8;
 }
 
-.counter{
-font-size:22px;
-color:#facc15;
-margin:10px 0;
-}
-
-input{
-padding:8px;
-border-radius:6px;
-border:none;
-margin-top:10px;
-width:80%;
-}
-
-.thanks{
-margin-top:15px;
-color:#4ade80;
-font-weight:bold;
-}
-
 img{
 margin-top:10px;
 border-radius:8px;
 }
 
+a{
+text-decoration:none;
+}
+
 </style>
 
 <script>
-
-let supporters = 0;
-
-function donate(){
-
-let name = document.getElementById("name").value;
-
-if(name===""){
-name="صديق";
-}
-
-supporters++;
-
-document.getElementById("counter").innerText=supporters;
-
-document.getElementById("thanks").innerText =
-"شكراً لدعمك يا " + name + " ❤️";
-
-}
-
-function copyText(text){
-navigator.clipboard.writeText(text);
-alert("تم نسخ الرقم");
-}
 
 function sharePage(){
 if (navigator.share){
@@ -125,31 +85,19 @@ alert("انسخ الرابط وشاركه مع أصدقائك");
 مبلغ التبرع المقترح: أي مبلغ هدية
 </p>
 
-<input id="name" placeholder="اكتب اسمك (اختياري)">
-
-<div class="counter">
-عدد الداعمين: <span id="counter">0</span>
-</div>
-
 <div class="card">
 
 <h3>ZainCash</h3>
 
-<p>07717980579</p>
+<p>امسح الباركود للتبرع</p>
 
-<button onclick="copyText('07717980579')">
-نسخ الرقم
-</button>
-
-<br><br>
-
-<a href="tel:07717980579">
-<button onclick="donate()">تحويل الآن</button>
-</a>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=07717980579">
 
 <br>
 
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=07717980579">
+<a href="tel:07717980579">
+<button>تحويل الآن</button>
+</a>
 
 </div>
 
@@ -157,11 +105,9 @@ alert("انسخ الرابط وشاركه مع أصدقائك");
 
 <h3>Rafidain Bank</h3>
 
-<p>9924257364</p>
+<p>رقم الحساب</p>
 
-<button onclick="copyText('9924257364')">
-نسخ الرقم
-</button>
+<p>9924257364</p>
 
 </div>
 
@@ -170,18 +116,20 @@ alert("انسخ الرابط وشاركه مع أصدقائك");
 <h3>PayPal</h3>
 
 <a href="https://paypal.me/ali2019">
-<button onclick="donate()">الدفع عبر PayPal</button>
+<button>الدفع عبر PayPal</button>
 </a>
 
 </div>
-
-<p id="thanks" class="thanks"></p>
 
 <br>
 
 <button class="share" onclick="sharePage()">
 مشاركة الصفحة
 </button>
+
+<p style="margin-top:20px">
+🙏 شكراً لدعمكم
+</p>
 
 </div>
 
