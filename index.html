@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>💰 دعم وتبرعات</title>
 
 <meta property="og:title" content="💰 دعم وتبرعات">
 <meta property="og:description" content="إذا حبيت تدعمني أو تساهم بتبرع ❤️">
 <meta property="og:image" content="logo.PNG">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
@@ -23,43 +26,39 @@ padding:30px;
 }
 
 .container{
-max-width:500px;
+max-width:600px;
 margin:auto;
 }
 
 .logo-box{
 position:relative;
 display:inline-block;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
 .logo{
-width:200px;
-border-radius:20px;
-animation:float 4s ease-in-out infinite;
-position:relative;
-z-index:2;
+width:220px;
+animation:float 5s ease-in-out infinite;
 }
 
 @keyframes float{
 0%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+50%{transform:translateY(-12px)}
 100%{transform:translateY(0)}
 }
 
 .shine{
 position:absolute;
 top:0;
-left:-75%;
+left:-70%;
 width:50%;
 height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,215,0,0.7),transparent);
-animation:shineMove 3s infinite;
-z-index:3;
+background:linear-gradient(120deg,transparent,rgba(255,215,0,0.8),transparent);
+animation:shineMove 4s infinite;
 }
 
 @keyframes shineMove{
-100%{left:125%}
+100%{left:120%}
 }
 
 .coin{
@@ -68,13 +67,13 @@ width:40px;
 animation:coinFloat 6s infinite linear;
 }
 
-.coin1{top:-10px;left:-20px}
-.coin2{top:20px;right:-20px}
-.coin3{bottom:-10px;left:30px}
+.coin1{top:-20px;left:-30px}
+.coin2{top:30px;right:-30px}
+.coin3{bottom:-10px;left:50px}
 
 @keyframes coinFloat{
 0%{transform:translateY(0) rotate(0deg)}
-50%{transform:translateY(-20px) rotate(180deg)}
+50%{transform:translateY(-25px) rotate(180deg)}
 100%{transform:translateY(0) rotate(360deg)}
 }
 
@@ -87,7 +86,7 @@ border-radius:15px;
 
 button{
 width:100%;
-padding:12px;
+padding:14px;
 border:none;
 border-radius:10px;
 background:#22c55e;
@@ -95,6 +94,10 @@ color:white;
 font-size:16px;
 margin-top:10px;
 cursor:pointer;
+}
+
+.share{
+background:#38bdf8;
 }
 
 .qr{
@@ -117,10 +120,36 @@ width:0%;
 transition:1s;
 }
 
+.donors{
+margin-top:15px;
+text-align:right;
+}
+
+.admin{
+background:#111827;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+}
+
+.notification{
+position:fixed;
+top:20px;
+right:20px;
+background:#22c55e;
+padding:12px 18px;
+border-radius:10px;
+display:none;
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="notification" id="notify">
+🎉 وصل تبرع جديد!
+</div>
 
 <div class="container">
 
@@ -137,7 +166,7 @@ transition:1s;
 </div>
 
 <h1>💰 دعم وتبرعات</h1>
-<p>إذا حبيت تدعمني ❤️</p>
+<p>إذا حبيت تدعمني أو تساهم بتبرع ❤️</p>
 
 <div class="card">
 
@@ -161,7 +190,7 @@ transition:1s;
 
 <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=07717980579">
 
-<button onclick="donate()">تبرعت</button>
+<button onclick="donate()">تبرعت عبر ZainCash</button>
 
 </div>
 
@@ -169,9 +198,13 @@ transition:1s;
 
 <h3>💳 سوبر كي</h3>
 
-<p style="font-size:20px;font-weight:bold;">9924257364</p>
+<p style="font-size:22px;font-weight:bold;">
+9924257364
+</p>
 
-<button onclick="copySuperKey()">نسخ الرقم</button>
+<button onclick="copySuperKey()">
+نسخ الرقم
+</button>
 
 </div>
 
@@ -180,28 +213,92 @@ transition:1s;
 <h3>PayPal</h3>
 
 <a href="https://paypal.me/ali2019">
+
 <button>الدفع عبر PayPal</button>
+
 </a>
 
 </div>
+
+<div class="card donors">
+
+<h3>👥 قائمة المتبرعين</h3>
+
+<ul id="list"></ul>
+
+</div>
+
+<div class="admin">
+
+<h3>⚙️ لوحة التحكم</h3>
+
+<input id="name" placeholder="اسم المتبرع">
+<input id="amount" placeholder="المبلغ">
+
+<button onclick="addDonation()">إضافة تبرع</button>
+
+<button onclick="resetData()">تصفير البيانات</button>
+
+</div>
+
+<button class="share" onclick="sharePage()">📤 مشاركة الصفحة</button>
 
 </div>
 
 <script>
 
 let goal=500
-let donations=0
-let donors=0
+
+let donations=localStorage.getItem("donations")||0
+let donors=localStorage.getItem("donors")||0
+let list=JSON.parse(localStorage.getItem("list")||"[]")
+
+update()
 
 function donate(){
 
-let name=prompt("اسم المتبرع")
-let amount=prompt("المبلغ")
+let name=prompt("اسمك؟")
+let amount=prompt("المبلغ؟")
 
-if(name && amount){
+if(name&&amount){
 
-donations+=Number(amount)
+add(name,amount)
+
+}
+
+}
+
+function addDonation(){
+
+let name=document.getElementById("name").value
+let amount=document.getElementById("amount").value
+
+if(name&&amount){
+
+add(name,amount)
+
+}
+
+}
+
+function add(name,amount){
+
+donations=Number(donations)+Number(amount)
 donors++
+
+list.push(name+" - $"+amount)
+
+localStorage.setItem("donations",donations)
+localStorage.setItem("donors",donors)
+localStorage.setItem("list",JSON.stringify(list))
+
+notify()
+
+update()
+
+}
+
+function update(){
 
 document.getElementById("donations").innerText=donations+"$"
 document.getElementById("donors").innerText=donors
@@ -209,7 +306,47 @@ document.getElementById("donors").innerText=donors
 let percent=(donations/goal)*100
 document.getElementById("bar").style.width=percent+"%"
 
-alert("شكراً لدعمك ❤️")
+let ul=document.getElementById("list")
+ul.innerHTML=""
+
+list.slice().reverse().forEach(d=>{
+let li=document.createElement("li")
+li.innerText=d
+ul.appendChild(li)
+})
+
+}
+
+function notify(){
+
+let n=document.getElementById("notify")
+n.style.display="block"
+
+setTimeout(()=>{
+n.style.display="none"
+},3000)
+
+}
+
+function resetData(){
+
+localStorage.clear()
+location.reload()
+
+}
+
+function sharePage(){
+
+if(navigator.share){
+
+navigator.share({
+title:"صفحة التبرعات",
+url:window.location.href
+})
+
+}else{
+
+alert("انسخ الرابط وشاركه")
 
 }
 
