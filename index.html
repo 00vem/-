@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>💰 دعم وتبرعات</title>
 
 <meta property="og:title" content="💰 دعم وتبرعات">
@@ -10,13 +12,16 @@
 <meta property="og:image" content="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://00vem.github.io/">
+
 <meta name="twitter:card" content="summary_large_image">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-font-family:Arial;
-background:#0f172a;
+font-family:'Cairo',sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
 color:white;
 text-align:center;
 padding:30px;
@@ -24,54 +29,67 @@ direction:rtl;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 }
 
-.header{
-margin-bottom:20px;
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #38bdf8;
 }
 
-.header h1{
-font-size:28px;
+.goal{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
 }
 
 .progress{
-background:#1e293b;
+background:#334155;
 border-radius:20px;
 overflow:hidden;
 height:20px;
-margin:20px 0;
+margin-top:15px;
 }
 
 .progress-bar{
 height:100%;
-width:30%;
 background:#22c55e;
+width:0%;
+transition:1s;
+}
+
+.stats{
+display:flex;
+justify-content:space-around;
+margin-top:10px;
 }
 
 .card{
 background:#1e293b;
 padding:20px;
 margin-top:15px;
-border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
+border-radius:15px;
+transition:0.3s;
 }
 
-.icon{
-width:120px;
-margin-bottom:15px;
+.card:hover{
+transform:scale(1.05);
 }
 
 button{
-margin-top:10px;
-padding:12px 20px;
+width:100%;
+padding:14px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 background:#22c55e;
 color:white;
-cursor:pointer;
 font-size:16px;
+margin-top:10px;
+cursor:pointer;
 }
 
 .share{
@@ -80,105 +98,236 @@ margin-top:20px;
 }
 
 .qr{
-width:200px;
+width:180px;
 margin-top:10px;
-border-radius:10px;
 }
 
-a{
-text-decoration:none;
+.donors-list{
+background:#1e293b;
+margin-top:20px;
+padding:15px;
+border-radius:15px;
+}
+
+.admin{
+background:#111827;
+margin-top:20px;
+padding:15px;
+border-radius:15px;
+}
+
+.notification{
+position:fixed;
+top:20px;
+right:20px;
+background:#22c55e;
+padding:15px;
+border-radius:10px;
+display:none;
 }
 
 </style>
-
-<script>
-
-function sharePage(){
-if (navigator.share){
-navigator.share({
-title:"صفحة التبرعات",
-url:window.location.href
-});
-}else{
-alert("انسخ الرابط وشاركه مع أصدقائك");
-}
-}
-
-</script>
 
 </head>
 
 <body>
 
+<div class="notification" id="notify">
+🎉 وصل تبرع جديد!
+</div>
+
 <div class="container">
 
-<div class="header">
+<img class="avatar" src="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
 
 <h1>💰 دعم وتبرعات</h1>
 
-<p>إذا حبيت تدعمني أو تساهم بتبرع ❤️</p>
+<p>إذا حبيت تدعمني ❤️</p>
 
-<p style="color:#38bdf8;font-size:18px;">
-مبلغ التبرع: أي مبلغ هدية
-</p>
+<div class="goal">
+
+<h3>🎯 هدف التبرعات 500$</h3>
+
+<div class="stats">
+
+<div>
+<b id="donations">0$</b>
+<p>المبلغ</p>
+</div>
+
+<div>
+<b id="donors">0</b>
+<p>المتبرعين</p>
+</div>
+
+</div>
 
 <div class="progress">
-<div class="progress-bar"></div>
+<div class="progress-bar" id="bar"></div>
 </div>
 
 </div>
 
 <div class="card">
-
-<img class="icon" src="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
 
 <h3>ZainCash</h3>
 
-<p>امسح الباركود للتبرع</p>
-
 <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=07717980579">
 
-<br>
-
-<a href="tel:07717980579">
-<button>تحويل الآن</button>
-</a>
+<button onclick="donate()">تبرعت</button>
 
 </div>
 
 <div class="card">
-
-<img class="icon" src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png">
-
-<h3>سوبر كي</h3>
-
-<p>رقم سوبر كي</p>
-
-<p style="font-size:18px;">9924257364</p>
-
-</div>
-
-<div class="card">
-
-<img class="icon" src="https://cdn-icons-png.flaticon.com/512/174/174861.png">
 
 <h3>PayPal</h3>
 
 <a href="https://paypal.me/ali2019">
+
 <button>الدفع عبر PayPal</button>
+
 </a>
 
 </div>
 
-<button class="share" onclick="sharePage()">
-مشاركة الصفحة
-</button>
+<div class="donors-list">
 
-<p style="margin-top:20px">
-🙏 شكراً لدعمكم
-</p>
+<h3>👥 قائمة المتبرعين</h3>
+
+<ul id="list"></ul>
 
 </div>
+
+<div class="admin">
+
+<h3>⚙️ لوحة التحكم</h3>
+
+<input id="name" placeholder="اسم المتبرع">
+
+<input id="amount" placeholder="المبلغ">
+
+<button onclick="addDonation()">إضافة تبرع</button>
+
+<button onclick="resetData()">تصفير البيانات</button>
+
+</div>
+
+<button class="share" onclick="sharePage()">📤 مشاركة الصفحة</button>
+
+</div>
+
+<script>
+
+let goal = 500
+
+let donations = localStorage.getItem("donations") || 0
+let donors = localStorage.getItem("donors") || 0
+let list = JSON.parse(localStorage.getItem("list") || "[]")
+
+update()
+
+function donate(){
+
+let name = prompt("اسمك؟")
+let amount = prompt("المبلغ؟")
+
+if(name && amount){
+
+add(name,amount)
+
+}
+
+}
+
+function addDonation(){
+
+let name=document.getElementById("name").value
+let amount=document.getElementById("amount").value
+
+if(name && amount){
+
+add(name,amount)
+
+}
+
+}
+
+function add(name,amount){
+
+donations = Number(donations) + Number(amount)
+donors++
+
+list.push(name + " - $" + amount)
+
+localStorage.setItem("donations",donations)
+localStorage.setItem("donors",donors)
+localStorage.setItem("list",JSON.stringify(list))
+
+notify()
+
+update()
+
+}
+
+function update(){
+
+document.getElementById("donations").innerText=donations+"$"
+document.getElementById("donors").innerText=donors
+
+let percent=(donations/goal)*100
+
+document.getElementById("bar").style.width=percent+"%"
+
+let ul=document.getElementById("list")
+
+ul.innerHTML=""
+
+list.slice().reverse().forEach(d=>{
+let li=document.createElement("li")
+li.innerText=d
+ul.appendChild(li)
+})
+
+}
+
+function notify(){
+
+let n=document.getElementById("notify")
+
+n.style.display="block"
+
+setTimeout(()=>{
+n.style.display="none"
+},3000)
+
+}
+
+function resetData(){
+
+localStorage.clear()
+
+location.reload()
+
+}
+
+function sharePage(){
+
+if(navigator.share){
+
+navigator.share({
+title:"صفحة التبرعات",
+url:window.location.href
+})
+
+}else{
+
+alert("انسخ الرابط وشاركه")
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
