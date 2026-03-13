@@ -1,333 +1,1212 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>💰 دعم وتبرعات</title>
+<meta name="description" content="إذا حبيت تدعمني أو تساهم بتبرع ❤️">
 
 <meta property="og:title" content="💰 دعم وتبرعات">
 <meta property="og:description" content="إذا حبيت تدعمني أو تساهم بتبرع ❤️">
 <meta property="og:image" content="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://00vem.github.io/">
+<meta property="og:locale" content="ar_AR">
 
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="💰 دعم وتبرعات">
+<meta name="twitter:description" content="إذا حبيت تدعمني أو تساهم بتبرع ❤️">
+<meta name="twitter:image" content="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg1:#081120;
+  --bg2:#0f172a;
+  --card:#111c32;
+  --card2:#16233f;
+  --text:#ffffff;
+  --muted:#9fb0d0;
+  --primary:#38bdf8;
+  --green:#22c55e;
+  --green2:#16a34a;
+  --warning:#f59e0b;
+  --danger:#ef4444;
+  --shadow:0 12px 30px rgba(0,0,0,.28);
+  --radius:22px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-font-family:'Cairo',sans-serif;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-color:white;
-text-align:center;
-padding:30px;
-direction:rtl;
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(56,189,248,.14), transparent 28%),
+    radial-gradient(circle at top left, rgba(34,197,94,.10), transparent 22%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
 .container{
-max-width:520px;
-margin:auto;
+  width:min(100%, 620px);
+  margin:auto;
+  padding:24px 16px 60px;
+  animation:pageIn .9s ease;
+}
+
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:28px;
+  padding:26px 20px 22px;
+  text-align:center;
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:auto -60px -60px auto;
+  width:180px;
+  height:180px;
+  background:radial-gradient(circle, rgba(56,189,248,.22), transparent 70%);
+  pointer-events:none;
+}
+
+.avatar-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px;
+}
+
+.avatar-wrap::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  border:2px solid rgba(56,189,248,.35);
+  animation:pulse 2.2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);opacity:1}
+  70%{transform:scale(1.08);opacity:.25}
+  100%{transform:scale(1.08);opacity:0}
 }
 
 .avatar{
-width:120px;
-height:120px;
-border-radius:50%;
-border:4px solid #38bdf8;
+  width:116px;
+  height:116px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,.9);
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  background:#0b1220;
 }
 
-.goal{
-background:#1e293b;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:6px auto 12px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(56,189,248,.12);
+  border:1px solid rgba(56,189,248,.25);
+  color:#d9f3ff;
+  font-size:14px;
 }
 
-.progress{
-background:#334155;
-border-radius:20px;
-overflow:hidden;
-height:20px;
-margin-top:15px;
+h1{
+  margin:6px 0 4px;
+  font-size:31px;
+  line-height:1.2;
 }
 
-.progress-bar{
-height:100%;
-background:#22c55e;
-width:0%;
-transition:1s;
+.subtitle{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
 }
 
-.stats{
-display:flex;
-justify-content:space-around;
-margin-top:10px;
+.grid-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.stat{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:14px 10px;
+}
+
+.stat b{
+  display:block;
+  font-size:22px;
+  font-weight:800;
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:13px;
 }
 
 .card{
-background:#1e293b;
-padding:20px;
-margin-top:15px;
-border-radius:15px;
-transition:0.3s;
+  margin-top:16px;
+  background:linear-gradient(180deg,var(--card),var(--card2));
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:var(--shadow);
+  padding:18px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .card:hover{
-transform:scale(1.05);
+  transform:translateY(-3px);
+  box-shadow:0 18px 35px rgba(0,0,0,.34);
+  border-color:rgba(56,189,248,.20);
 }
 
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-background:#22c55e;
-color:white;
-font-size:16px;
-margin-top:10px;
-cursor:pointer;
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
 }
 
-.share{
-background:#38bdf8;
-margin-top:20px;
+.section-title h2,
+.section-title h3{
+  margin:0;
+  font-size:19px;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.progress-wrap{
+  margin-top:12px;
+}
+
+.progress-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:8px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.progress{
+  height:16px;
+  background:#0c1528;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--green),#4ade80);
+  box-shadow:0 0 20px rgba(34,197,94,.45);
+  transition:width .8s ease;
+  position:relative;
+}
+
+.progress-bar::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  animation:shine 2.2s linear infinite;
+}
+
+@keyframes shine{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
+
+.methods{
+  display:grid;
+  gap:14px;
+}
+
+.method-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.icon-badge{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.method-title{
+  text-align:right;
+}
+
+.method-title h3{
+  margin:0;
+  font-size:19px;
+}
+
+.method-title p{
+  margin:2px 0 0;
+  color:var(--muted);
+  font-size:14px;
 }
 
 .qr{
-width:180px;
-margin-top:10px;
+  display:block;
+  width:180px;
+  max-width:100%;
+  margin:10px auto 6px;
+  border-radius:18px;
+  background:#fff;
+  padding:8px;
 }
 
-.donors-list{
-background:#1e293b;
-margin-top:20px;
-padding:15px;
-border-radius:15px;
+.number-box{
+  margin-top:10px;
+  padding:14px;
+  border-radius:16px;
+  background:#0d1730;
+  border:1px dashed rgba(255,255,255,.16);
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:1px;
+  word-break:break-all;
 }
 
-.admin{
-background:#111827;
-margin-top:20px;
-padding:15px;
-border-radius:15px;
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
 }
 
-.notification{
-position:fixed;
-top:20px;
-right:20px;
-background:#22c55e;
-padding:15px;
-border-radius:10px;
-display:none;
+.btn{
+  appearance:none;
+  border:none;
+  cursor:pointer;
+  border-radius:16px;
+  padding:14px 16px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  color:#fff;
+  transition:transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+  box-shadow:0 10px 24px rgba(0,0,0,.20);
 }
 
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn-primary{
+  background:linear-gradient(180deg,var(--green),var(--green2));
+}
+
+.btn-secondary{
+  background:linear-gradient(180deg,#1f6feb,#1558c0);
+}
+
+.btn-sky{
+  background:linear-gradient(180deg,#38bdf8,#0284c7);
+}
+
+.btn-dark{
+  background:linear-gradient(180deg,#334155,#1e293b);
+}
+
+.btn-warning{
+  background:linear-gradient(180deg,#f59e0b,#d97706);
+}
+
+.btn-danger{
+  background:linear-gradient(180deg,#ef4444,#b91c1c);
+}
+
+.btn-full{
+  width:100%;
+}
+
+.ticker{
+  margin-top:16px;
+  overflow:hidden;
+  border-radius:16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.ticker-track{
+  display:flex;
+  width:max-content;
+  padding:10px 0;
+  animation:tickerMove 24s linear infinite;
+}
+
+.ticker-item{
+  white-space:nowrap;
+  padding:0 16px;
+  color:#dbeafe;
+  font-size:14px;
+}
+
+@keyframes tickerMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+.list{
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
+
+.list-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#0d1730;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:16px;
+  padding:12px 14px;
+}
+
+.list-item .name{
+  font-weight:700;
+}
+
+.list-item .meta{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.list-item .amount{
+  color:#86efac;
+  font-weight:800;
+  font-size:16px;
+}
+
+.rank{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(245,158,11,.18);
+  color:#ffd77a;
+  font-weight:800;
+  flex:0 0 auto;
+}
+
+.empty{
+  color:var(--muted);
+  text-align:center;
+  padding:18px;
+  background:#0d1730;
+  border-radius:16px;
+  border:1px dashed rgba(255,255,255,.09);
+}
+
+.admin-panel{
+  display:none;
+}
+
+.admin-panel.show{
+  display:block;
+  animation:fadeUp .35s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.field{
+  margin-top:12px;
+}
+
+.input,
+.select{
+  width:100%;
+  padding:14px 14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#0b1326;
+  color:#fff;
+  font-family:inherit;
+  font-size:15px;
+  outline:none;
+}
+
+.input::placeholder{
+  color:#7f91b3;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.hint{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+.footer-note{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:16px;
+  line-height:1.9;
+}
+
+.toast-wrap{
+  position:fixed;
+  top:16px;
+  left:16px;
+  right:16px;
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  pointer-events:none;
+}
+
+.toast{
+  min-width:min(100%, 360px);
+  max-width:420px;
+  background:linear-gradient(180deg,rgba(34,197,94,.98),rgba(22,163,74,.98));
+  color:#fff;
+  border-radius:18px;
+  box-shadow:0 18px 35px rgba(0,0,0,.28);
+  padding:14px 18px;
+  transform:translateY(-120px);
+  opacity:0;
+  transition:.35s ease;
+  text-align:center;
+  font-weight:700;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.floating{
+  position:fixed;
+  left:16px;
+  bottom:18px;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.float-btn{
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  color:#fff;
+  cursor:pointer;
+  font-size:22px;
+  box-shadow:0 12px 26px rgba(0,0,0,.30);
+  transition:transform .18s ease;
+}
+
+.float-btn:hover{
+  transform:translateY(-2px);
+}
+
+.float-share{ background:linear-gradient(180deg,#38bdf8,#0284c7); }
+.float-admin{ background:linear-gradient(180deg,#334155,#1e293b); }
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.72);
+  backdrop-filter: blur(6px);
+  z-index:9998;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  padding:14px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(100%, 520px);
+  background:linear-gradient(180deg,#0e1830,#13203b);
+  border-radius:24px 24px 16px 16px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 18px 40px rgba(0,0,0,.32);
+  padding:18px;
+  animation:sheetUp .28s ease;
+}
+
+@keyframes sheetUp{
+  from{transform:translateY(25px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.modal-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.close-btn{
+  border:none;
+  background:#1e293b;
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+.divider{
+  height:1px;
+  background:rgba(255,255,255,.07);
+  margin:16px 0;
+}
+
+.center{
+  text-align:center;
+}
+
+.glow{
+  box-shadow:0 0 0 1px rgba(56,189,248,.1), 0 0 30px rgba(56,189,248,.08);
+}
+
+@media (max-width:560px){
+  .grid-stats{
+    grid-template-columns:1fr;
+  }
+  .row,
+  .actions{
+    grid-template-columns:1fr;
+  }
+  h1{
+    font-size:27px;
+  }
+  .number-box{
+    font-size:20px;
+  }
+}
 </style>
-
 </head>
-
 <body>
 
-<div class="notification" id="notify">
-🎉 وصل تبرع جديد!
+<div class="toast-wrap">
+  <div class="toast" id="toast">🎉 وصل تبرع جديد</div>
 </div>
 
 <div class="container">
 
-<img class="avatar" src="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png">
+  <section class="hero glow">
+    <div class="avatar-wrap">
+      <img class="avatar" src="https://00vem.github.io/437B091F-6A30-443E-A48C-087AF0D53636.png" alt="الصورة الشخصية">
+    </div>
 
-<h1>💰 دعم وتبرعات</h1>
+    <div class="badge">✨ شكراً لكل من يدعم ويشارك الصفحة</div>
 
-<p>إذا حبيت تدعمني ❤️</p>
+    <h1>💰 دعم وتبرعات</h1>
+    <p class="subtitle">
+      إذا حبيت تدعمني أو تساهم بتبرع ❤️<br>
+      كل مساهمة تصنع فرقًا كبيرًا
+    </p>
 
-<div class="goal">
+    <div class="grid-stats">
+      <div class="stat">
+        <b id="statAmount">0$</b>
+        <span>إجمالي التبرعات</span>
+      </div>
+      <div class="stat">
+        <b id="statDonors">0</b>
+        <span>عدد المتبرعين</span>
+      </div>
+      <div class="stat">
+        <b id="statGoalPercent">0%</b>
+        <span>نسبة الوصول للهدف</span>
+      </div>
+    </div>
+  </section>
 
-<h3>🎯 هدف التبرعات 500$</h3>
+  <section class="card">
+    <div class="section-title">
+      <h2>🎯 هدف التبرعات</h2>
+      <span class="small" id="goalText">0 / 500$</span>
+    </div>
 
-<div class="stats">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span>التقدم الحالي</span>
+        <span id="progressLabel">0%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
 
-<div>
-<b id="donations">0$</b>
-<p>المبلغ</p>
+    <div class="ticker" id="tickerBox" style="display:none;">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </section>
+
+  <section class="methods">
+
+    <div class="card">
+      <div class="method-head">
+        <div class="icon-badge">📱</div>
+        <div class="method-title">
+          <h3>ZainCash</h3>
+          <p>امسح الباركود أو أضف التبرع يدويًا</p>
+        </div>
+      </div>
+
+      <img
+        class="qr"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=07717980579"
+        alt="QR ZainCash"
+      >
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="openDonateModal('ZainCash')">تبرعت عبر ZainCash</button>
+        <a href="tel:07717980579">
+          <button class="btn btn-dark btn-full" type="button">اتصال</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="method-head">
+        <div class="icon-badge">💳</div>
+        <div class="method-title">
+          <h3>سوبر كي</h3>
+          <p>انسخ الرقم بسهولة واستخدمه للتحويل</p>
+        </div>
+      </div>
+
+      <div class="number-box" id="superKeyNumber">9924257364</div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="copySuperKey()">نسخ رقم سوبر كي</button>
+        <button class="btn btn-primary" onclick="openDonateModal('SuperKey')">أضف تبرع سوبر كي</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="method-head">
+        <div class="icon-badge">🌍</div>
+        <div class="method-title">
+          <h3>PayPal</h3>
+          <p>دعم سريع وآمن عبر PayPal</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="https://paypal.me/ali2019" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-secondary btn-full" type="button">الذهاب إلى PayPal</button>
+        </a>
+        <button class="btn btn-primary" onclick="openDonateModal('PayPal')">سجل تبرع PayPal</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="card">
+    <div class="section-title">
+      <h3>🏆 أفضل المتبرعين</h3>
+      <span class="small">أعلى المبالغ</span>
+    </div>
+    <div id="topDonorsList" class="list"></div>
+  </section>
+
+  <section class="card">
+    <div class="section-title">
+      <h3>👥 آخر المتبرعين</h3>
+      <span class="small">أحدث الإضافات</span>
+    </div>
+    <div id="recentDonorsList" class="list"></div>
+  </section>
+
+  <section class="card">
+    <div class="section-title">
+      <h3>⚙️ لوحة التحكم</h3>
+      <span class="small">اضغط الزر لإظهارها</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-dark" onclick="toggleAdmin()">إظهار / إخفاء اللوحة</button>
+      <button class="btn btn-sky" onclick="sharePage()">مشاركة الصفحة</button>
+    </div>
+
+    <div class="admin-panel" id="adminPanel">
+      <div class="divider"></div>
+
+      <div class="row">
+        <div class="field">
+          <input class="input" id="donorName" type="text" placeholder="اسم المتبرع">
+        </div>
+        <div class="field">
+          <input class="input" id="donationAmount" type="number" min="1" step="0.01" placeholder="المبلغ">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <select class="select" id="donationMethod">
+            <option value="ZainCash">ZainCash</option>
+            <option value="SuperKey">سوبر كي</option>
+            <option value="PayPal">PayPal</option>
+            <option value="أخرى">أخرى</option>
+          </select>
+        </div>
+        <div class="field">
+          <input class="input" id="goalInput" type="number" min="1" step="1" placeholder="غيّر الهدف الحالي">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="addDonationFromAdmin()">إضافة تبرع</button>
+        <button class="btn btn-warning" onclick="updateGoal()">تحديث الهدف</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-dark" onclick="exportData()">نسخ البيانات</button>
+        <button class="btn btn-danger" onclick="resetAllData()">تصفير كل البيانات</button>
+      </div>
+
+      <p class="hint">
+        هذه اللوحة تعمل داخل نفس المتصفح. إذا فتحت الصفحة من جهاز آخر فلن تظهر نفس البيانات إلا عند ربط الموقع بقاعدة بيانات.
+      </p>
+    </div>
+  </section>
+
+  <p class="footer-note">
+    🙏 شكراً لدعمكم ومشاركتكم للرابط
+  </p>
 </div>
 
-<div>
-<b id="donors">0</b>
-<p>المتبرعين</p>
+<div class="floating">
+  <button class="float-btn float-share" onclick="sharePage()" title="مشاركة">📤</button>
+  <button class="float-btn float-admin" onclick="toggleAdmin()" title="لوحة التحكم">⚙️</button>
 </div>
 
-</div>
+<div class="modal" id="donateModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h3 style="margin:0;">إضافة تبرع</h3>
+      <button class="close-btn" onclick="closeDonateModal()">×</button>
+    </div>
 
-<div class="progress">
-<div class="progress-bar" id="bar"></div>
-</div>
+    <p class="small center" id="modalMethodText">طريقة التبرع</p>
 
-</div>
+    <div class="field">
+      <input class="input" id="modalDonorName" type="text" placeholder="اسم المتبرع">
+    </div>
 
-<div class="card">
+    <div class="field">
+      <input class="input" id="modalDonationAmount" type="number" min="1" step="0.01" placeholder="المبلغ">
+    </div>
 
-<h3>ZainCash</h3>
-
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=07717980579">
-
-<button onclick="donate()">تبرعت</button>
-
-</div>
-
-<div class="card">
-
-<h3>PayPal</h3>
-
-<a href="https://paypal.me/ali2019">
-
-<button>الدفع عبر PayPal</button>
-
-</a>
-
-</div>
-
-<div class="donors-list">
-
-<h3>👥 قائمة المتبرعين</h3>
-
-<ul id="list"></ul>
-
-</div>
-
-<div class="admin">
-
-<h3>⚙️ لوحة التحكم</h3>
-
-<input id="name" placeholder="اسم المتبرع">
-
-<input id="amount" placeholder="المبلغ">
-
-<button onclick="addDonation()">إضافة تبرع</button>
-
-<button onclick="resetData()">تصفير البيانات</button>
-
-</div>
-
-<button class="share" onclick="sharePage()">📤 مشاركة الصفحة</button>
-
+    <div class="actions">
+      <button class="btn btn-primary" onclick="confirmModalDonation()">تأكيد الإضافة</button>
+      <button class="btn btn-dark" onclick="closeDonateModal()">إلغاء</button>
+    </div>
+  </div>
 </div>
 
 <script>
+const STORAGE_KEY = "donation_page_data_v3";
 
-let goal = 500
+let state = {
+  goal: 500,
+  donations: []
+};
 
-let donations = localStorage.getItem("donations") || 0
-let donors = localStorage.getItem("donors") || 0
-let list = JSON.parse(localStorage.getItem("list") || "[]")
+let currentModalMethod = "ZainCash";
 
-update()
-
-function donate(){
-
-let name = prompt("اسمك؟")
-let amount = prompt("المبلغ؟")
-
-if(name && amount){
-
-add(name,amount)
-
+function loadState(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(saved){
+    try{
+      state = JSON.parse(saved);
+      if(!state.goal || state.goal < 1) state.goal = 500;
+      if(!Array.isArray(state.donations)) state.donations = [];
+    }catch(e){
+      state = { goal:500, donations:[] };
+    }
+  }
 }
 
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-function addDonation(){
-
-let name=document.getElementById("name").value
-let amount=document.getElementById("amount").value
-
-if(name && amount){
-
-add(name,amount)
-
+function formatMoney(num){
+  const n = Number(num || 0);
+  return n.toLocaleString("en-US", { maximumFractionDigits: 2 }) + "$";
 }
 
+function getTotal(){
+  return state.donations.reduce((sum, d) => sum + Number(d.amount || 0), 0);
 }
 
-function add(name,amount){
-
-donations = Number(donations) + Number(amount)
-donors++
-
-list.push(name + " - $" + amount)
-
-localStorage.setItem("donations",donations)
-localStorage.setItem("donors",donors)
-localStorage.setItem("list",JSON.stringify(list))
-
-notify()
-
-update()
-
+function getDonorsCount(){
+  return state.donations.length;
 }
 
-function update(){
-
-document.getElementById("donations").innerText=donations+"$"
-document.getElementById("donors").innerText=donors
-
-let percent=(donations/goal)*100
-
-document.getElementById("bar").style.width=percent+"%"
-
-let ul=document.getElementById("list")
-
-ul.innerHTML=""
-
-list.slice().reverse().forEach(d=>{
-let li=document.createElement("li")
-li.innerText=d
-ul.appendChild(li)
-})
-
+function getPercent(){
+  const total = getTotal();
+  const percent = state.goal > 0 ? (total / state.goal) * 100 : 0;
+  return Math.min(percent, 100);
 }
 
-function notify(){
-
-let n=document.getElementById("notify")
-
-n.style.display="block"
-
-setTimeout(()=>{
-n.style.display="none"
-},3000)
-
+function showToast(text){
+  const toast = document.getElementById("toast");
+  toast.textContent = text;
+  toast.classList.add("show");
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3200);
 }
 
-function resetData(){
+function renderStats(){
+  const total = getTotal();
+  const donorsCount = getDonorsCount();
+  const percent = getPercent();
 
-localStorage.clear()
+  document.getElementById("statAmount").textContent = formatMoney(total);
+  document.getElementById("statDonors").textContent = donorsCount.toLocaleString("en-US");
+  document.getElementById("statGoalPercent").textContent = Math.round(percent) + "%";
 
-location.reload()
+  document.getElementById("goalText").textContent = formatMoney(total) + " / " + formatMoney(state.goal);
+  document.getElementById("progressLabel").textContent = Math.round(percent) + "%";
+  document.getElementById("progressBar").style.width = percent + "%";
+}
 
+function createEmpty(message){
+  const div = document.createElement("div");
+  div.className = "empty";
+  div.textContent = message;
+  return div;
+}
+
+function renderRecentDonors(){
+  const container = document.getElementById("recentDonorsList");
+  container.innerHTML = "";
+
+  if(state.donations.length === 0){
+    container.appendChild(createEmpty("لا توجد تبرعات بعد"));
+    return;
+  }
+
+  const recent = [...state.donations].reverse().slice(0, 8);
+
+  recent.forEach((d) => {
+    const item = document.createElement("div");
+    item.className = "list-item";
+    item.innerHTML = `
+      <div>
+        <div class="name">${escapeHtml(d.name || "متبرع")}</div>
+        <div class="meta">${escapeHtml(d.method || "تبرع")} • ${escapeHtml(d.timeText || "")}</div>
+      </div>
+      <div class="amount">${formatMoney(d.amount)}</div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function renderTopDonors(){
+  const container = document.getElementById("topDonorsList");
+  container.innerHTML = "";
+
+  if(state.donations.length === 0){
+    container.appendChild(createEmpty("أفضل المتبرعين سيظهرون هنا"));
+    return;
+  }
+
+  const grouped = {};
+
+  state.donations.forEach((d) => {
+    const name = (d.name || "متبرع").trim();
+    if(!grouped[name]) grouped[name] = 0;
+    grouped[name] += Number(d.amount || 0);
+  });
+
+  const sorted = Object.entries(grouped)
+    .sort((a,b) => b[1] - a[1])
+    .slice(0,5);
+
+  sorted.forEach(([name, amount], index) => {
+    const item = document.createElement("div");
+    item.className = "list-item";
+    item.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="rank">${index + 1}</div>
+        <div>
+          <div class="name">${escapeHtml(name)}</div>
+          <div class="meta">إجمالي الدعم</div>
+        </div>
+      </div>
+      <div class="amount">${formatMoney(amount)}</div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function renderTicker(){
+  const box = document.getElementById("tickerBox");
+  const track = document.getElementById("tickerTrack");
+  track.innerHTML = "";
+
+  if(state.donations.length === 0){
+    box.style.display = "none";
+    return;
+  }
+
+  const items = [...state.donations].reverse().slice(0,10).map(d => {
+    return `🎉 ${d.name} دعم بـ ${formatMoney(d.amount)} عبر ${d.method}`;
+  });
+
+  const doubled = items.concat(items);
+
+  doubled.forEach(text => {
+    const span = document.createElement("div");
+    span.className = "ticker-item";
+    span.textContent = text;
+    track.appendChild(span);
+  });
+
+  box.style.display = "block";
+}
+
+function renderAll(){
+  renderStats();
+  renderRecentDonors();
+  renderTopDonors();
+  renderTicker();
+}
+
+function nowText(){
+  const now = new Date();
+  return now.toLocaleString("ar-IQ", {
+    year:"numeric",
+    month:"short",
+    day:"numeric",
+    hour:"numeric",
+    minute:"2-digit"
+  });
+}
+
+function addDonation(name, amount, method){
+  const cleanName = String(name || "").trim();
+  const numAmount = Number(amount);
+
+  if(!cleanName){
+    showToast("اكتب اسم المتبرع");
+    return;
+  }
+
+  if(!numAmount || numAmount <= 0){
+    showToast("اكتب مبلغ صحيح");
+    return;
+  }
+
+  state.donations.push({
+    name: cleanName,
+    amount: numAmount,
+    method: method || "أخرى",
+    time: Date.now(),
+    timeText: nowText()
+  });
+
+  saveState();
+  renderAll();
+  showToast(`🎉 وصل تبرع جديد من ${cleanName} بقيمة ${formatMoney(numAmount)}`);
+}
+
+function toggleAdmin(){
+  document.getElementById("adminPanel").classList.toggle("show");
+}
+
+function copySuperKey(){
+  const number = "9924257364";
+  navigator.clipboard.writeText(number).then(() => {
+    showToast("✅ تم نسخ رقم سوبر كي");
+  }).catch(() => {
+    showToast("انسخ الرقم يدويًا: " + number);
+  });
 }
 
 function sharePage(){
-
-if(navigator.share){
-
-navigator.share({
-title:"صفحة التبرعات",
-url:window.location.href
-})
-
-}else{
-
-alert("انسخ الرابط وشاركه")
-
+  if(navigator.share){
+    navigator.share({
+      title:"💰 دعم وتبرعات",
+      text:"إذا حبيت تدعمني أو تساهم بتبرع ❤️",
+      url:window.location.href
+    }).catch(() => {});
+  }else{
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast("✅ تم نسخ رابط الصفحة");
+    }).catch(() => {
+      showToast("انسخ الرابط يدويًا");
+    });
+  }
 }
 
+function addDonationFromAdmin(){
+  const name = document.getElementById("donorName").value;
+  const amount = document.getElementById("donationAmount").value;
+  const method = document.getElementById("donationMethod").value;
+
+  addDonation(name, amount, method);
+
+  document.getElementById("donorName").value = "";
+  document.getElementById("donationAmount").value = "";
 }
 
+function updateGoal(){
+  const value = Number(document.getElementById("goalInput").value);
+  if(!value || value <= 0){
+    showToast("اكتب هدف صحيح");
+    return;
+  }
+
+  state.goal = value;
+  saveState();
+  renderAll();
+  showToast("✅ تم تحديث هدف التبرعات");
+  document.getElementById("goalInput").value = "";
+}
+
+function exportData(){
+  const text = JSON.stringify(state, null, 2);
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("✅ تم نسخ بيانات التبرعات");
+  }).catch(() => {
+    showToast("تعذر نسخ البيانات");
+  });
+}
+
+function resetAllData(){
+  const ok = confirm("هل أنت متأكد من تصفير كل البيانات؟");
+  if(!ok) return;
+
+  state = {
+    goal: 500,
+    donations: []
+  };
+
+  saveState();
+  renderAll();
+  showToast("🗑️ تم تصفير كل البيانات");
+}
+
+function openDonateModal(method){
+  currentModalMethod = method;
+  document.getElementById("modalMethodText").textContent = "طريقة التبرع: " + method;
+  document.getElementById("modalDonorName").value = "";
+  document.getElementById("modalDonationAmount").value = "";
+  document.getElementById("donateModal").classList.add("show");
+}
+
+function closeDonateModal(){
+  document.getElementById("donateModal").classList.remove("show");
+}
+
+function confirmModalDonation(){
+  const name = document.getElementById("modalDonorName").value;
+  const amount = document.getElementById("modalDonationAmount").value;
+  addDonation(name, amount, currentModalMethod);
+  if(String(name).trim() && Number(amount) > 0){
+    closeDonateModal();
+  }
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+document.getElementById("donateModal").addEventListener("click", function(e){
+  if(e.target === this){
+    closeDonateModal();
+  }
+});
+
+loadState();
+renderAll();
 </script>
-
 </body>
 </html>
